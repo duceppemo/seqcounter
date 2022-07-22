@@ -69,7 +69,6 @@ python seqcounter.py \
 ```commandline
 python seqcounter.py \
     -r1 NC_002945.4.fasta \
-    --min-count 1 \
     -o spoligotyper_output/
 ```
 4. Input folder containing single-end fastq, paired-end fastq and fasta files:
