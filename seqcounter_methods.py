@@ -107,7 +107,7 @@ class SeqCounterMethods(object):
             sample = SeqCounterMethods.get_sample_name(r1)
             sample_dict[sample] = [os.path.abspath(r1)]
             if r2:
-                sample_dict[sample].append(os.path.abspath(r1))
+                sample_dict[sample].append(os.path.abspath(r2))
         else:
             raise Exception('Please provide valid input. See help.')
 
@@ -123,7 +123,7 @@ class SeqCounterMethods(object):
         print('Processing {}'.format(sample))
 
         # Stats file
-        stats_file = output_folder + '/' + sample + '_stats.tsv'
+        stats_file = os.path.abspath(output_folder + '/' + sample + '_stats.tsv')
 
         if len(fastq_list) == 1:
             cmd = ['seal.sh',
