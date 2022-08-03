@@ -9,7 +9,7 @@ Count occurrence of reference sequence(s) from NGS sequencing (fastq) and assemb
 1. Create and activate `seqcounter` virtual environment:
 ```commandline
 # Create virtual environment
-conda create -n seqcounter -y -c bioconda bbmap pandas
+conda create -n seqcounter -y -c bioconda bbmap pandas psutil
 
 # Activate virtual environment
 conda activate seqcounter
