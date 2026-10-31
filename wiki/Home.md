@@ -1,4 +1,9 @@
-# seqcounter
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/duceppemo/seqcounter/main/assets/logo_dark.svg">
+    <img src="https://raw.githubusercontent.com/duceppemo/seqcounter/main/assets/logo.svg" width="460" alt="seqcounter: count reference sequences in reads or assemblies">
+  </picture>
+</p>
 
 Count how many sequencing reads (fastq) or contigs (fasta) contain each sequence of a reference fasta file, using
 [Seal](https://sourceforge.net/projects/bbmap/) from BBTools.
