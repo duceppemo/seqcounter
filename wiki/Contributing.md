@@ -1,7 +1,7 @@
 # Contributing
 
 Bug reports, questions, ideas and pull requests are all welcome. The full guide is in
-[CONTRIBUTING.md](https://github.com/duceppemo/seqcounter/blob/master/CONTRIBUTING.md); this page is the short
+[CONTRIBUTING.md](https://github.com/duceppemo/seqcounter/blob/main/CONTRIBUTING.md); this page is the short
 version, plus what the code looks like from the inside.
 
 ## Reporting something
@@ -54,6 +54,6 @@ Two rules worth knowing before changing anything:
   the first version and are what other people's scripts read. Add columns and files rather than changing it.
 
 ## Pull requests
-* Branch from `master`, one change per pull request.
+* Branch from `main`, one change per pull request.
 * Add or update tests; the suite is at 100% coverage and should stay there.
 * Update `wiki/` if users are affected, and add a line to [Changelog](Changelog) under "Unreleased".

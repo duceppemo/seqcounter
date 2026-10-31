@@ -31,7 +31,7 @@ To see it work on data you can look at, run `bash examples/run_example.sh`: it b
 few samples with known counts, runs seqcounter on them and prints the reports.
 
 ## Pull requests
-* Branch from `master` and keep each pull request focused on one change.
+* Branch from `main` and keep each pull request focused on one change.
 * Add or update tests for any change in behaviour.
 * Match the style of the surrounding code.
 * Update the documentation in `wiki/` if the change affects users (see below), and add a line to
@@ -39,7 +39,7 @@ few samples with known counts, runs seqcounter on them and prints the reports.
 
 ## Documentation
 The [wiki](https://github.com/duceppemo/seqcounter/wiki) is maintained in the [`wiki/`](wiki/) folder of this
-repository and published automatically when changes reach `master`. **Do not edit the wiki on GitHub directly**:
+repository and published automatically when changes reach `main`. **Do not edit the wiki on GitHub directly**:
 those changes would be overwritten. Edit the files in `wiki/` in your pull request instead.
 
 ## Releases (maintainers)

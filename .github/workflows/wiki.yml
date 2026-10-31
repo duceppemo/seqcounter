@@ -4,7 +4,7 @@ name: wiki
 # Do not edit the wiki on GitHub directly: changes are overwritten by the next sync.
 on:
   push:
-    branches: [master]
+    branches: [main]
     paths:
       - 'wiki/**'
       - '.github/workflows/wiki.yml'

@@ -64,8 +64,8 @@ flags and the same `refseqcounts.tsv`; what changed is around that.
   counts; the tests that need Seal are skipped when BBTools is absent.
 * GitHub Actions: tests on Python 3.10, 3.12 and 3.14 with ruff and Codecov, PyPI publishing on release, and this
   wiki published from `wiki/`.
-* A [wiki](Home), a [bioconda recipe](https://github.com/duceppemo/seqcounter/tree/master/recipe), a
-  [`CITATION.cff`](https://github.com/duceppemo/seqcounter/blob/master/CITATION.cff), and
+* A [wiki](Home), a [bioconda recipe](https://github.com/duceppemo/seqcounter/tree/main/recipe), a
+  [`CITATION.cff`](https://github.com/duceppemo/seqcounter/blob/main/CITATION.cff), and
   `examples/run_example.sh`, which generates its own data and counts it.
 
 ## 0.1 (2023-05-04, tagged 2026-10-30)

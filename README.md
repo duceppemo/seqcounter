@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/duceppemo/seqcounter/master/assets/logo_dark.svg">
-    <img src="https://raw.githubusercontent.com/duceppemo/seqcounter/master/assets/logo.svg" width="520" alt="seqcounter: count reference sequences in reads or assemblies">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/duceppemo/seqcounter/main/assets/logo_dark.svg">
+    <img src="https://raw.githubusercontent.com/duceppemo/seqcounter/main/assets/logo.svg" width="520" alt="seqcounter: count reference sequences in reads or assemblies">
   </picture>
 </p>
 

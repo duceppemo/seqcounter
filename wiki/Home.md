@@ -38,5 +38,5 @@ Python 3.10 or newer, and BBTools (`seal.sh`, which needs Java). seqcounter itse
 standard library.
 
 ## Citing
-Please cite seqcounter and BBTools: see [CITATION.cff](https://github.com/duceppemo/seqcounter/blob/master/CITATION.cff)
+Please cite seqcounter and BBTools: see [CITATION.cff](https://github.com/duceppemo/seqcounter/blob/main/CITATION.cff)
 or the "Cite this repository" button on the repository page.
