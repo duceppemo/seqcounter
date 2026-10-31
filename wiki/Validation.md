@@ -8,6 +8,10 @@ which downloads about 150 MB of public data and takes a few minutes:
 bash validation/run_validation.sh
 ```
 
+The figures below are drawn from those same results by
+[`validation/make_figures.py`](https://github.com/duceppemo/seqcounter/blob/main/validation/make_figures.py), so
+they change with the data and not by hand.
+
 It checks what seqcounter counts against counts that are known independently: in an assembly, in reads simulated
 from that assembly, and in three public read sets.
 
@@ -65,6 +69,17 @@ On 1,000,000 simulated reads of 150 bp with 0.2% sequencing errors (34×), count
 | `-m 0` | **1.00** | 0.93–1.07 | 5,305 | **16.1** | 0 |
 | `-m 1` | 1.02 | 0.94–1.08 | 5,312 | 15.8 | 0 |
 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/duceppemo/seqcounter/main/assets/validation_model_dark.svg">
+    <img src="https://raw.githubusercontent.com/duceppemo/seqcounter/main/assets/validation_model.svg" width="760" alt="Reads counted against reads expected, log-log, for 1,000,000 simulated reads: the 75 single-copy windows lie on the one-copy line over a sevenfold range of expected counts, and IS6110 lies on the sixteen-copy line at 5,305 reads, which is 16.1 copies.">
+  </picture>
+</p>
+
+*Each point is one reference: what it was counted, against what the model expects for a single copy. The windows
+come in five lengths, so they stack in five columns; the vertical scatter inside a column is the sampling noise of
+a few hundred reads. The lines are not fitted — they are the model at one copy and at sixteen.*
+
 The 75 single-copy windows, which span a 17-fold range of lengths, land on the prediction with a median of 1.00.
 IS6110's count, divided by the rate of a single copy in the same sample, gives **16.1 copies** where the genome has
 16. The length term and the copy-number term of the model are therefore both right, and the tool measures what the
@@ -105,7 +120,17 @@ The same reference set, on three public read sets of *M. tuberculosis*:
 | ERR14057033 | 586,752 | 19.7× | 1.24 | 1.04–1.53 | 3,550 | 14.7 | 0 |
 | ERR14057206 | 1,055,736 | 35.6× | 1.26 | 0.97–1.68 | 10,994 | 24.9 | 0 |
 
-Two things are visible, and they are different in kind.
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/duceppemo/seqcounter/main/assets/validation_coverage_dark.svg">
+    <img src="https://raw.githubusercontent.com/duceppemo/seqcounter/main/assets/validation_coverage.svg" width="760" alt="Counted over expected for the 75 single-copy windows in four samples: tight around 1.00 for the simulated reads, and spread from roughly 0.6 to 2.0 with medians of 1.21 to 1.26 for three real read sets. The implied IS6110 copy number is 16.1 simulated, and 22.8, 14.7 and 24.9 on the real samples.">
+  </picture>
+</p>
+
+*One dot per single-copy window, one row per sample, against the same model. The bar under each row is the
+interquartile range and the tick is the median.*
+
+Two things are visible in the figure, and they are different in kind.
 
 **The windows.** Where simulated reads give a median of 1.00 and quartiles within ±7%, real reads give 1.21 to 1.26
 with quartiles spanning half the value again. Single-copy loci are not sampled evenly in a real library, and the

@@ -79,3 +79,11 @@ python3 validate.py mismatch "$results/sim_m0/refseqcounts.json" "$results/sim_m
 echo
 echo "== public read sets: coverage is not even =="
 python3 validate.py report "$data/refs.fasta" "$results/reads/refseqcounts.json"
+
+echo
+echo "== the figures on the wiki page, redrawn from these results =="
+if python3 -c 'import matplotlib' 2>/dev/null; then
+  python3 make_figures.py
+else
+  echo "  skipped: matplotlib is not installed"
+fi

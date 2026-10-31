@@ -8,7 +8,9 @@
   over 200,000 reads and 77 references; a reference is counted once per sequence of a fasta file, even at 16
   copies; with even coverage the counts follow the model to a median of 1.00 and recover a 16-copy element as 16.1
   copies; a sequence absent from the genome stays at zero everywhere; and `-m 1` adds reads from near-matches
-  elsewhere in the genome for 22 of 77 references, by nothing at the median window and up to +43%.
+  elsewhere in the genome for 22 of 77 references, by nothing at the median window and up to +43%. Two figures,
+  drawn from the results by `validation/make_figures.py`, show the counts against the model and the spread of
+  real coverage.
 * The logo is drawn as outlines rather than text, so it renders without the font it was designed in, and the wiki
   front page carries it.
 
