@@ -3,7 +3,7 @@
 # bioconda-recipes/recipes/seqcounter and open a pull request. For a new release: tag it,
 # bump `version`, recompute the sha256 and reset `number` to 0.
 {% set name = "seqcounter" %}
-{% set version = "1.0.0" %}
+{% set version = "1.0.1" %}
 
 package:
   name: {{ name }}
@@ -61,5 +61,7 @@ about:
   doc_url: https://github.com/duceppemo/seqcounter/wiki
 
 extra:
+  identifiers:
+    - doi:10.5281/zenodo.23826933
   recipe-maintainers:
     - duceppemo

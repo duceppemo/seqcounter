@@ -13,9 +13,16 @@ authors:
     given-names: Marc-Olivier
     email: marc-olivier.duceppe@inspection.gc.ca
     affiliation: Canadian Food Inspection Agency
-version: 1.0.0
+version: 1.0.1
 date-released: "2026-10-30"
-# The Zenodo DOI of the archived release is added here once the release is published.
+doi: 10.5281/zenodo.23826933
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.23826933
+    description: "Concept DOI: all versions, resolves to the latest"
+  - type: doi
+    value: 10.5281/zenodo.23826934
+    description: "Version DOI for 1.0.0"
 license: MIT
 repository-code: "https://github.com/duceppemo/seqcounter"
 url: "https://github.com/duceppemo/seqcounter/wiki"

@@ -13,6 +13,7 @@
   <img src="https://img.shields.io/badge/python-3.10%E2%80%933.14-blue" alt="Python 3.10–3.14">
   <a href="LICENSE"><img src="https://img.shields.io/github/license/duceppemo/seqcounter" alt="License"></a>
   <a href="https://github.com/duceppemo/seqcounter/wiki"><img src="https://img.shields.io/badge/docs-wiki-informational" alt="Documentation"></a>
+  <a href="https://doi.org/10.5281/zenodo.23826933"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.23826933.svg" alt="DOI"></a>
 </p>
 
 Count how many sequencing reads (fastq) or contigs (fasta) contain each sequence of a reference file, with
@@ -85,7 +86,10 @@ The **[wiki](https://github.com/duceppemo/seqcounter/wiki)** covers
 If you use seqcounter, please cite it and BBTools, which does the counting:
 
 > Duceppe M-O. seqcounter: count the occurrences of reference sequences in sequencing reads or genome assemblies.
-> https://github.com/duceppemo/seqcounter
+> Zenodo. https://doi.org/10.5281/zenodo.23826933
+
+This DOI always points to the latest version; each release also has its own DOI, listed on
+[Zenodo](https://doi.org/10.5281/zenodo.23826933).
 
 > Bushnell B. BBTools. https://sourceforge.net/projects/bbmap/
 

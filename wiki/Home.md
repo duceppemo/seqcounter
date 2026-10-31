@@ -38,5 +38,10 @@ Python 3.10 or newer, and BBTools (`seal.sh`, which needs Java). seqcounter itse
 standard library.
 
 ## Citing
-Please cite seqcounter and BBTools: see [CITATION.cff](https://github.com/duceppemo/seqcounter/blob/main/CITATION.cff)
-or the "Cite this repository" button on the repository page.
+Please cite seqcounter and BBTools:
+
+> Duceppe M-O. seqcounter: count the occurrences of reference sequences in sequencing reads or genome assemblies.
+> Zenodo. https://doi.org/10.5281/zenodo.23826933
+
+That DOI resolves to the latest version. The "Cite this repository" button on the repository page gives the same
+citation in APA and BibTeX, from [CITATION.cff](https://github.com/duceppemo/seqcounter/blob/main/CITATION.cff).

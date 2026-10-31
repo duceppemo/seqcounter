@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.1 (2026-10-30)
+* The default branch is now `main`, and the links that named the branch follow it: the logo in the README, which
+  `raw.githubusercontent.com` serves per branch and does not redirect after a rename, and the `blob/` links from
+  this wiki.
+* The Zenodo DOI of the archived releases is recorded in `CITATION.cff` and in the README badge:
+  [10.5281/zenodo.23826933](https://doi.org/10.5281/zenodo.23826933) resolves to the latest version.
+* No change to the code: 1.0.1 and 1.0.0 count identically.
+
 ## 1.0.0 (2026-10-30)
 seqcounter becomes an installable, tested package. Everything the first version did, it still does, with the same
 flags and the same `refseqcounts.tsv`; what changed is around that.
