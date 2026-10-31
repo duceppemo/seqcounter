@@ -11,7 +11,7 @@ package:
 
 source:
   url: https://github.com/duceppemo/seqcounter/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 0000000000000000000000000000000000000000000000000000000000000000
+  sha256: 8d98e4dcd32516443baf3fc485805877652ef7abebe3ea9714da9032458b6907
 
 build:
   number: 0
