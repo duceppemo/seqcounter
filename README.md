@@ -11,7 +11,7 @@
   <a href="https://github.com/duceppemo/seqcounter/releases/latest"><img src="https://img.shields.io/github/v/release/duceppemo/seqcounter?cacheSeconds=3600" alt="Release"></a>
   <a href="https://pypi.org/project/seqcounter/"><img src="https://img.shields.io/pypi/v/seqcounter?cacheSeconds=3600" alt="PyPI"></a>
   <img src="https://img.shields.io/badge/python-3.10%E2%80%933.14-blue" alt="Python 3.10–3.14">
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/duceppemo/seqcounter" alt="License"></a>
+  <a href="https://github.com/duceppemo/seqcounter/blob/main/LICENSE"><img src="https://img.shields.io/github/license/duceppemo/seqcounter" alt="License"></a>
   <a href="https://github.com/duceppemo/seqcounter/wiki"><img src="https://img.shields.io/badge/docs-wiki-informational" alt="Documentation"></a>
   <a href="https://doi.org/10.5281/zenodo.23826933"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.23826933.svg" alt="DOI"></a>
 </p>
@@ -99,7 +99,7 @@ This DOI always points to the latest version; each release also has its own DOI,
 > Bushnell B. BBTools. https://sourceforge.net/projects/bbmap/
 
 GitHub's **"Cite this repository"** button gives the citation in APA and BibTeX formats, from
-[`CITATION.cff`](CITATION.cff).
+[`CITATION.cff`](https://github.com/duceppemo/seqcounter/blob/main/CITATION.cff).
 
 ## Related
 * [spoligotyper](https://github.com/duceppemo/spoligotyper) — *in silico* spoligotyping of the *M. tuberculosis*
@@ -109,10 +109,10 @@ GitHub's **"Cite this repository"** button gives the citation in APA and BibTeX 
   junction PCR for *Brucella*, from assemblies.
 
 ## Contributing
-Bug reports, questions and pull requests are welcome: see [CONTRIBUTING.md](CONTRIBUTING.md).
+Bug reports, questions and pull requests are welcome: see [CONTRIBUTING.md](https://github.com/duceppemo/seqcounter/blob/main/CONTRIBUTING.md).
 
 ## Author
 Marc-Olivier Duceppe, Canadian Food Inspection Agency (CFIA): marc-olivier.duceppe@inspection.gc.ca
 
 ## License
-[MIT](LICENSE)
+[MIT](https://github.com/duceppemo/seqcounter/blob/main/LICENSE)
