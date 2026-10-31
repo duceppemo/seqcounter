@@ -1,0 +1,47 @@
+name: tests
+
+on:
+  push:
+    branches: ['**']  # Not on tags: the tagged commit was already tested on its branch
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: pip install ruff
+      - run: ruff check --output-format=github .
+
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false  # A failure on one Python version does not cancel the others
+      matrix:
+        python-version: ["3.10", "3.12", "3.14"]
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: mamba-org/setup-micromamba@v3
+        with:
+          environment-file: environment.yml
+          create-args: python=${{ matrix.python-version }}
+      - run: pip install --no-deps -e .
+      - run: seal.sh --version
+      - run: pytest -v --cov --cov-report=term --cov-report=xml
+      # Upload once: coverage is the same on every Python version.
+      # Dependabot pull requests cannot read the CODECOV_TOKEN secret, so they skip the upload.
+      - uses: codecov/codecov-action@v7
+        if: matrix.python-version == '3.12' && github.actor != 'dependabot[bot]'
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage.xml
+          # Strict on pushes once the CODECOV_TOKEN secret is set, to notice a broken Codecov setup. Pull requests
+          # from forks upload without the token, and a Codecov hiccup should not make a contributor's pull request fail.
+          fail_ci_if_error: ${{ github.event_name == 'push' && secrets.CODECOV_TOKEN != '' }}

@@ -1,0 +1,40 @@
+name: wiki
+
+# The wiki is maintained in the wiki/ folder of this repository and published to the GitHub wiki from here.
+# Do not edit the wiki on GitHub directly: changes are overwritten by the next sync.
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'wiki/**'
+      - '.github/workflows/wiki.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write  # Needed to push to the wiki repository
+
+concurrency:
+  group: wiki
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - name: Publish wiki/ to the GitHub wiki
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git clone --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.wiki.git" wiki-repo
+          rsync -a --delete --exclude .git wiki/ wiki-repo/
+          cd wiki-repo
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Wiki is already up to date"
+            exit 0
+          fi
+          git commit -m "Sync wiki from ${GITHUB_REPOSITORY}@${GITHUB_SHA::7}"
+          git push

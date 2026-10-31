@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Documentation
+    url: https://github.com/duceppemo/seqcounter/wiki
+    about: Usage, output files, troubleshooting and FAQ
+  - name: Security problem
+    url: https://github.com/duceppemo/seqcounter/security/advisories/new
+    about: Please report security problems privately

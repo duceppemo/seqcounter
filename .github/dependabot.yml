@@ -1,0 +1,14 @@
+# Keep the GitHub Actions used by the workflows up to date (one grouped pull request per month).
+# Python dependencies are not included: seqcounter has none, and pyproject.toml only sets minimum versions for the
+# test tools. Dependabot pull requests skip the Codecov upload (see tests.yml).
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      github-actions:
+        patterns: ["*"]
+    commit-message:
+      prefix: CI

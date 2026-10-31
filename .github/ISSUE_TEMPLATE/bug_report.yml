@@ -1,0 +1,43 @@
+name: Bug report
+description: Something does not work as expected, or a count looks wrong
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report! Please check the [troubleshooting page](https://github.com/duceppemo/seqcounter/wiki/Troubleshooting) and the [FAQ](https://github.com/duceppemo/seqcounter/wiki/FAQ) first.
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Output of `seqcounter --version`
+      placeholder: seqcounter 1.0.0
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Command
+      description: The exact command you ran
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened, and what did you expect?
+      description: For a count that looks wrong, please include the row of `refseqcounts.tsv`, the reference sequence (or its length), and how many matches you expected.
+    validations:
+      required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: Log
+      description: Messages printed by seqcounter, ideally from a run with `--verbose`
+      render: text
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Operating system, how you installed seqcounter (bioconda, pip, a clone), BBTools version (`seal.sh --version`)
+      placeholder: Ubuntu 24.04, bioconda, BBTools 39.13
