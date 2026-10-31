@@ -31,7 +31,7 @@ seal.sh -Xmx1024m in=sample_R1.fastq.gz in2=sample_R2.fastq.gz ref=refs.fasta k=
 | `k=25`, `hdist=1` | `-k` and `-m`: the k-mer size and the mismatches allowed per k-mer |
 | `rcomp=t` | Count a match on either strand |
 | `maskmiddle=f` | Do not treat the middle base of a k-mer as a wildcard, which is Seal's default and would allow one more mismatch than asked for |
-| `clearzone=999999`, `ambiguous=all` | Count a read for every reference it matches, instead of assigning it to the best one |
+| `clearzone=999999`, `ambiguous=all` | Count a read for every reference it matches, instead of assigning it to the best one. **Both are needed**: see below |
 | `nzo=f` | Report references with no match, so every reference has a row |
 | `qin=33` | Force the quality encoding: autodetection fails on some low quality nanopore reads |
 | `int=f` (single input file) | Never guess that one fastq file is interleaved, which would halve the counts |
@@ -39,6 +39,22 @@ seal.sh -Xmx1024m in=sample_R1.fastq.gz in2=sample_R2.fastq.gz ref=refs.fasta k=
 
 Seal writes its stats to a temporary file, which seqcounter parses and removes; nothing but the reports is left in
 the output folder.
+
+### Why `clearzone` is not optional
+Seal assigns each read to the reference it shares the most k-mers with, and `ambiguous=` only decides what happens
+to reads it considers *ambiguous*. With the default `clearzone=0`, a read is ambiguous only when two references tie
+exactly, so `ambiguous=all` on its own is not enough: a read holding an 80 bp reference and a 30 bp one is not a
+tie, and the short reference gets nothing. Checked on one read containing both, with BBTools 39.01:
+
+| Settings | 80 bp reference | 30 bp reference |
+| --- | --- | --- |
+| `ambiguous=all clearzone=999999` (seqcounter) | 1 | **1** |
+| `ambiguous=all` alone (`clearzone=0`) | 1 | **0** |
+
+`clearzone=999999` makes every reference sharing a k-mer with the read fall inside the ambiguity zone of the best
+match, and `ambiguous=all` then counts the read for all of them. Lower either one and references that share a read
+with a better match lose their counts silently. Seal's own default is `ambiguous=random`, which would scatter tied
+reads between references at random.
 
 ## Before Seal runs
 * **The reference file** is read and checked: it must be fasta, no sequence may be empty or shorter than `-k`, and

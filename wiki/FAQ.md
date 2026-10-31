@@ -49,9 +49,17 @@ No, nucleotide sequences only. Both strands are searched, which only makes sense
 
 ### How is this different from `bbduk.sh` or `kmercountexact.sh`?
 Seal, which seqcounter drives, is the BBTools program for counting reads per reference sequence; `bbduk.sh` filters
-or trims reads, and `kmercountexact.sh` counts k-mers of the input, not reads per reference. seqcounter adds sample
-discovery and pairing, the checks on the reference file, the per-sample totals, the three reports and the parallel
-runs, and it pins the Seal settings that make a count mean what this wiki says it means.
+or trims reads, and `kmercountexact.sh` counts k-mers of the input, not reads per reference.
+
+The difference that matters for counting is that **`bbduk.sh` credits each matched read to one reference only**,
+while Seal can credit it to every reference it matches. On one read containing two 30 bp references, with BBTools
+39.01, `bbduk.sh stats=` reports 1 and 0 for them, and Seal as seqcounter calls it reports 1 and 1. `bbduk.sh` has
+no `ambiguous=` or `clearzone=` option to change that, because deciding which reads to discard is a different job
+from counting what is in them. A reference that tends to occur alongside a longer one would simply read as absent.
+
+seqcounter adds sample discovery and pairing, the checks on the reference file, the per-sample totals, the three
+reports and the parallel runs, and it pins the Seal settings that make a count mean what this wiki says it means
+(see [How it works](How-it-works#why-clearzone-is-not-optional)).
 
 ### Is it tied to spoligotyping?
 No, although that is where it came from: counting the 43 spacers of the direct repeat locus is one reference file
