@@ -1,0 +1,72 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "seqcounter"
+dynamic = ["version"]
+description = "Count the occurrences of reference sequences in sequencing reads or genome assemblies"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "Marc-Olivier Duceppe", email = "marc-olivier.duceppe@inspection.gc.ca"}]
+requires-python = ">=3.10"
+keywords = ["bioinformatics", "kmer", "counting", "reference sequences", "fastq", "fasta", "wgs", "BBTools", "Seal"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Science/Research",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+# Seal, from BBTools (https://sourceforge.net/projects/bbmap/), must also be installed: it is not available from
+# PyPI. seqcounter itself needs nothing but the Python standard library.
+dependencies = []
+
+[project.optional-dependencies]
+test = ["pytest>=7", "pytest-cov>=5"]
+
+[project.urls]
+Homepage = "https://github.com/duceppemo/seqcounter"
+Documentation = "https://github.com/duceppemo/seqcounter/wiki"
+Changelog = "https://github.com/duceppemo/seqcounter/wiki/Changelog"
+Issues = "https://github.com/duceppemo/seqcounter/issues"
+
+[project.scripts]
+seqcounter = "seqcounter.cli:main"
+
+[tool.setuptools]
+packages = ["seqcounter"]
+
+[tool.setuptools.dynamic]
+# "seqcounter.__init__" rather than "seqcounter": the root seqcounter.py shim has the same name as the package,
+# and setuptools resolves the plain name to that file, which holds no version.
+version = {attr = "seqcounter.__init__.__version__"}
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["seqcounter"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM"]
+ignore = ["UP031", "UP032"]  # str.format() is used throughout
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["E501"]
