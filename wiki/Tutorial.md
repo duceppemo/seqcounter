@@ -103,7 +103,8 @@ comparable between samples of different size. Divide by the reads:
 Now the order is different from the raw counts, and the real result appears: ERR14057033 carries clearly less
 IS6110 than the other two, per read sequenced. That is a property of the isolates — IS6110 copy number varies
 between strains, which is why it was the standard fingerprint for tuberculosis for decades. The
-[Validation](Validation) page turns these same numbers into copy numbers (14.7, 22.8 and 24.9) by adding
+[Validation](Validation) page turns these same numbers into copy numbers (22.8, 14.7 and 24.9, in the order
+of the table) by adding
 single-copy references to the file and calibrating against them.
 
 `results/refseqcounts.json` holds all of it again, with the parameters, the software versions and the input files,

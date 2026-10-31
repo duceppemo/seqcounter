@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Draw the two figures on the wiki's Validation page from the results of run_validation.sh.
+Draw the three figures on the wiki's Validation page from the results of run_validation.sh.
 
     python3 make_figures.py        # needs matplotlib; run run_validation.sh first
 
@@ -9,7 +9,7 @@ dark version of each figure:
 
     validation_model.svg      counted against expected, on simulated reads (section 3 of the page)
     validation_coverage.svg   counted over expected per sample, simulated and real (section 5)
-    validation_chromosome.svg the chromosome, its IS6110 copies and its repeated kilobases (section 1)
+    validation_chromosome.svg the chromosome, its IS6110 copies and its repeated kilobases (the data section)
 
 Nothing is drawn that is not in the data: the expected counts come from the same uniform-coverage model as
 `validate.py report`, the copy numbers and the IS6110 sites are counted in the genome here, the named loci are at
@@ -127,8 +127,14 @@ def copy_number_profile(genome, element):
     bins = len(occurrence) // BIN
     binned = np.median(occurrence[:bins * BIN].reshape(bins, BIN), axis=1)
     element_codes, element_usable = kmer_codes(element)
-    median_copies = int(np.median(counts[np.searchsorted(unique, element_codes[element_usable])]))
-    positions = np.flatnonzero(np.isin(codes, element_codes))
+    # The element comes from its own GenBank record, which is not identical to this genome's copies of it: some of
+    # its k-mers are not in the genome at all. They count as zero, as validate.py counts them, rather than being
+    # read off whichever k-mer sorts next.
+    wanted = element_codes[element_usable]
+    found = np.searchsorted(unique, wanted)
+    present = np.take(unique, found, mode='clip') == wanted
+    median_copies = int(np.median(np.where(present, counts[np.clip(found, 0, len(counts) - 1)], 0)))
+    positions = np.flatnonzero(np.isin(codes, wanted))
     sites = []
     for run in np.split(positions, np.flatnonzero(np.diff(positions) > 2000) + 1):
         span = run[-1] + K - run[0]

@@ -38,6 +38,9 @@ tests/             pytest, 100% coverage; conftest.py builds the synthetic data
 wiki/              this wiki, published by .github/workflows/wiki.yml
 recipe/            the bioconda recipe
 examples/          run_example.sh: generates references and samples, and counts them
+validation/        validate.py and run_validation.sh: the counts checked against known answers,
+                   and make_figures.py, which draws the figures of the Validation page
+assets/            the logo and the validation figures, with the scripts that generate them
 ```
 
 One quirk to know about: the root `seqcounter.py` shim has the same name as the package, so setuptools resolves
@@ -57,3 +60,4 @@ Two rules worth knowing before changing anything:
 * Branch from `main`, one change per pull request.
 * Add or update tests; the suite is at 100% coverage and should stay there.
 * Update `wiki/` if users are affected, and add a line to [Changelog](Changelog) under "Unreleased".
+* The code is wrapped by hand: lint with `ruff check .`, and do not run `ruff format`.

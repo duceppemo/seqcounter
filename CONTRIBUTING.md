@@ -25,6 +25,8 @@ The end-to-end tests in `tests/test_integration.py` run Seal on small synthetic 
 are skipped if `seal.sh` is not installed. The suite covers 100% of the package, so please keep it there.
 
 Lint with [ruff](https://docs.astral.sh/ruff/): `ruff check .`, or install the git hook with `pre-commit install`.
+`ruff format` is **not** used: the code is wrapped by hand to read as prose, and reformatting it would rewrite
+most of the files for nothing.
 The tests run on GitHub Actions for Python 3.10, 3.12 and 3.14.
 
 To see it work on data you can look at, run `bash examples/run_example.sh`: it builds a small reference file and a

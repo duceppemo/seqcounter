@@ -64,6 +64,11 @@ show_missing = true
 line-length = 120
 target-version = "py310"
 
+[tool.ruff.format]
+# The code is hand-wrapped and quoted with '', and "ruff format" is not part of the workflow (CONTRIBUTING.md
+# asks for "ruff check" only). This at least keeps an editor that formats on save from requoting every line.
+quote-style = "single"
+
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "UP", "B", "SIM"]
 ignore = ["UP031", "UP032"]  # str.format() is used throughout

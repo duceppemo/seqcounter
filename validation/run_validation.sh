@@ -23,7 +23,9 @@ command -v seqcounter >/dev/null || seqcounter="python3 $PWD/../seqcounter.py"
 
 eutils=https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi
 fetch() {  # fetch <url> <file>
-  [ -s "$2" ] || { echo "downloading $(basename "$2")"; curl -sS --max-time 900 "$1" -o "$2"; }
+  # Downloaded beside the file and moved into place, so an interrupted download is not kept as a complete one
+  [ -s "$2" ] || { echo "downloading $(basename "$2")"; curl -sS --fail --max-time 900 "$1" -o "$2.part" \
+                     && mv "$2.part" "$2"; }
 }
 
 echo "== reference genome and insertion sequence =="

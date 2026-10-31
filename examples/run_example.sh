@@ -60,7 +60,7 @@ $seqcounter -ref "$data/refs.fasta" -i "$data/samples" -o "$results" -p 2
 
 echo
 echo "### $results/refseqcounts.tsv (without its first line, which holds the command that was run)"
-grep -v '^#' "$results/refseqcounts.tsv" | column -t -s $'\t' 
+grep -v '^#' "$results/refseqcounts.tsv" | column -t -s $'\t'
 echo
 echo "### $results/refseqcounts_samples.tsv"
 cut -f 1-6 "$results/refseqcounts_samples.tsv" | column -t -s $'\t'
