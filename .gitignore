@@ -11,3 +11,5 @@ dist/
 coverage.xml
 examples/data/
 examples/results/
+validation/data/
+validation/results/

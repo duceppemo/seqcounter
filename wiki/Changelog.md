@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased
+* A [Tutorial](Tutorial): counting IS6110 in three public *M. tuberculosis* read sets, from installing to reading
+  the reports and normalizing the counts, with the real output of every command.
+* A [Validation](Validation) page, and `validation/run_validation.sh`, which reproduces it from public data in a
+  few minutes. What it establishes: the counts are identical, read for read, to an independent exact k-mer scan
+  over 200,000 reads and 77 references; a reference is counted once per sequence of a fasta file, even at 16
+  copies; with even coverage the counts follow the model to a median of 1.00 and recover a 16-copy element as 16.1
+  copies; a sequence absent from the genome stays at zero everywhere; and `-m 1` adds reads from near-matches
+  elsewhere in the genome for 22 of 77 references, by nothing at the median window and up to +43%.
+* The logo is drawn as outlines rather than text, so it renders without the font it was designed in, and the wiki
+  front page carries it.
+
 ## 1.0.1 (2026-10-30)
 * The default branch is now `main`, and the links that named the branch follow it: the logo in the README, which
   `raw.githubusercontent.com` serves per branch and does not redirect after a rename, and the `blob/` links from

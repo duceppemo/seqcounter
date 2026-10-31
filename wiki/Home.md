@@ -25,9 +25,12 @@ for reads and for assemblies, and writes the counts as a table, a per-sample sum
 
 ## Where to start
 * **[Installation](Installation)** — conda, pip, or from a clone
+* **[Tutorial](Tutorial)** — count IS6110 in three public samples, in ten minutes
 * **[Usage](Usage)** — the input, every option, and what to expect
 * **[Output files](Output-files)** — the three reports, column by column
 * **[How it works](How-it-works)** — what a count is, exactly, and how Seal is called
+* **[Validation](Validation)** — the counts checked against known answers, in an assembly, in simulated reads and
+  in public read sets
 * **[Troubleshooting](Troubleshooting)** — when a count is 0, a sample fails, or Seal runs out of memory
 * **[FAQ](FAQ)**
 * **[Changelog](Changelog)**

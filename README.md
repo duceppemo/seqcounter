@@ -47,6 +47,9 @@ twice       1         0         154     65
 * **Nothing to configure**: no database, no index, no reference genome. Only the Python standard library, plus
   BBTools.
 * **Tested**: 105 tests, 100% coverage, end to end on synthetic references, genomes and reads with known counts.
+* **Validated** on real data: counts identical to an independent k-mer scan, read for read; 16.1 copies recovered
+  for a 16-copy element in simulated reads; a negative control at zero throughout
+  ([Validation](https://github.com/duceppemo/seqcounter/wiki/Validation)).
 
 ## Installation
 ```
@@ -75,10 +78,12 @@ reads match it. See [How it works](https://github.com/duceppemo/seqcounter/wiki/
 
 ## Documentation
 The **[wiki](https://github.com/duceppemo/seqcounter/wiki)** covers
-[installation](https://github.com/duceppemo/seqcounter/wiki/Installation),
-[usage and options](https://github.com/duceppemo/seqcounter/wiki/Usage),
+[installation](https://github.com/duceppemo/seqcounter/wiki/Installation), a
+[tutorial](https://github.com/duceppemo/seqcounter/wiki/Tutorial) that counts IS6110 in three public samples in ten
+minutes, [usage and options](https://github.com/duceppemo/seqcounter/wiki/Usage),
 [output files](https://github.com/duceppemo/seqcounter/wiki/Output-files),
 [how it works](https://github.com/duceppemo/seqcounter/wiki/How-it-works),
+[validation](https://github.com/duceppemo/seqcounter/wiki/Validation),
 [troubleshooting](https://github.com/duceppemo/seqcounter/wiki/Troubleshooting) and the
 [FAQ](https://github.com/duceppemo/seqcounter/wiki/FAQ).
 
