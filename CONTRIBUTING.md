@@ -37,7 +37,7 @@ few samples with known counts, runs seqcounter on them and prints the reports.
 * Add or update tests for any change in behaviour.
 * Match the style of the surrounding code.
 * Update the documentation in `wiki/` if the change affects users (see below), and add a line to
-  `wiki/Changelog.md` under "Unreleased".
+  `wiki/Changelog.md` under "Unreleased" (the section is created by the first change after a release).
 
 ## Documentation
 The [wiki](https://github.com/duceppemo/seqcounter/wiki) is maintained in the [`wiki/`](wiki/) folder of this

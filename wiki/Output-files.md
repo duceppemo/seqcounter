@@ -45,6 +45,9 @@ thousand reads and in a million.
 | `Files` | The input file(s), separated by `;` |
 | `Error` | Empty, or why the sample failed |
 
+A row is always one line of eight fields: a tab or a line break in a file name, or in an error message (Seal's
+output is tab aligned and several lines long), is replaced by a space rather than shifting the columns.
+
 `Matched` is not the sum of the column in `refseqcounts.tsv`: a read containing two different references is counted
 once in `Matched` and once for each reference in the counts table.
 
@@ -54,7 +57,7 @@ For pipelines, and for the record: everything the run knew.
 ```json
 {
   "tool": "seqcounter",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "references": [
     {"name": "present", "description": "example reference", "length": 60}
   ],
@@ -66,7 +69,7 @@ For pipelines, and for the record: everything the run knew.
   "command": "seqcounter -ref refs.fasta -i samples/ -o results/ -p 2",
   "started": "2026-10-30T12:00:00-04:00",
   "finished": "2026-10-30T12:00:03-04:00",
-  "software": {"seqcounter": "1.0.0", "Python": "3.12.3", "BBTools": "39.13", "Java": "openjdk version \"17.0.9\""},
+  "software": {"seqcounter": "1.0.2", "Python": "3.12.3", "BBTools": "39.13", "Java": "openjdk version \"17.0.9\""},
   "parameters": {"Reference": "/data/refs.fasta", "Input": "/data/samples", "Output folder": "/data/results",
                  "K-mer size": 25, "Mismatches": 1, "Threads": 16, "Parallel samples": 2, "Seal memory": "1024m"}
 }

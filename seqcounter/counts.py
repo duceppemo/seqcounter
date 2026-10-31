@@ -3,6 +3,7 @@
 import json
 import logging
 import platform
+import re
 import sys
 from concurrent import futures
 from dataclasses import dataclass, field
@@ -109,6 +110,16 @@ def write_counts(results, references, path, command=None):
 SAMPLES_HEADER = ['Sample', 'Type', 'Reads', 'Bases', 'Matched', 'MatchedPct', 'Files', 'Error']
 
 
+def one_cell(text):
+    """
+    Text that cannot break the table it is written into: no tab, no line break.
+
+    Seal's error output is tab aligned and several lines long, and a file name may hold anything, so neither can
+    be written to a tab separated file as it comes.
+    """
+    return re.sub(r'[\t\r\n]+', ' ', text).strip()
+
+
 def write_samples(results, path):
     """One row per sample: how much was read, how much matched, and the error if it failed."""
     with open(path, 'w') as f:
@@ -120,8 +131,8 @@ def write_samples(results, path):
                                '' if r.bases is None else str(r.bases),
                                '' if r.matched is None else str(r.matched),
                                '' if percent is None else '{:.4f}'.format(percent),
-                               ';'.join(r.files),
-                               (r.error or '').replace('\n', ' ')]) + '\n')
+                               one_cell(';'.join(r.files)),
+                               one_cell(r.error or '')]) + '\n')
 
 
 def write_json(results, references, path, run=None):

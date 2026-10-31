@@ -59,5 +59,6 @@ Two rules worth knowing before changing anything:
 ## Pull requests
 * Branch from `main`, one change per pull request.
 * Add or update tests; the suite is at 100% coverage and should stay there.
-* Update `wiki/` if users are affected, and add a line to [Changelog](Changelog) under "Unreleased".
+* Update `wiki/` if users are affected, and add a line to [Changelog](Changelog) under "Unreleased", creating
+  that section if the last change was a release.
 * The code is wrapped by hand: lint with `ruff check .`, and do not run `ruff format`.

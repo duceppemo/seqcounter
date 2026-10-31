@@ -12,7 +12,6 @@ centres properly wherever it is placed.
 Edit the layout below and run it again; the generated files are what the repository ships.
 """
 import pathlib
-import re
 import sys
 
 from fontTools.misc.transform import Transform
@@ -106,7 +105,7 @@ def main():
     (assets / 'logo.svg').write_text(svg)
     dark = svg
     for light, replacement in DARK.items():
-        dark = re.sub(light, replacement, dark)
+        dark = dark.replace(light, replacement)
     (assets / 'logo_dark.svg').write_text(dark)
     print('viewBox {:.1f} {:.1f} {:.1f} {:.1f}'.format(*view_box))
     for name in ('logo.svg', 'logo_dark.svg'):

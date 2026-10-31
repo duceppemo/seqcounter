@@ -4,7 +4,15 @@ from datetime import datetime
 import pytest
 
 from seqcounter import counts
-from seqcounter.counts import Result, count_sample, count_samples, counts_table, run_info, write_reports
+from seqcounter.counts import (
+    SAMPLES_HEADER,
+    Result,
+    count_sample,
+    count_samples,
+    counts_table,
+    run_info,
+    write_reports,
+)
 from seqcounter.references import Reference
 from seqcounter.samples import Sample
 from seqcounter.seal import SealError, SealStats
@@ -91,7 +99,7 @@ def test_count_samples_never_asks_for_more_jobs_than_samples(monkeypatch):
 def test_write_reports(tmp_path, monkeypatch):
     monkeypatch.setattr(counts, 'versions', lambda: {'BBTools': '39.01', 'Java': 'openjdk 17'})
     results = [result('S1', {'present': 7, 'absent': 0}, reads=200, bases=20000, matched=7),
-               result('S2', {}, error='Seal failed (exit code 1): boom\nCommand: seal.sh')]
+               result('S2', {}, error='Seal failed (exit code 1): boom\nReads:\t100\tTime:\t1.2s')]
     run = run_info('seqcounter -ref refs.fasta -i reads/ -o out/', {'K-mer size': 25},
                    datetime(2026, 10, 30, 12, 0).astimezone())
     rows, reports = write_reports(results, REFERENCES, tmp_path / 'out', command=run['command'], run=run)
@@ -107,7 +115,9 @@ def test_write_reports(tmp_path, monkeypatch):
     assert samples[0] == ['Sample', 'Type', 'Reads', 'Bases', 'Matched', 'MatchedPct', 'Files', 'Error']
     assert samples[1] == ['S1', 'fastq', '200', '20000', '7', '3.5000', 'S1.fastq.gz', '']
     assert samples[2][:6] == ['S2', 'fastq', '', '', '', '']
-    assert '\n' not in samples[2][7] and 'boom' in samples[2][7]  # The error stays on one line
+    # Seal's output is tab aligned and several lines long: it must not add columns to a tab separated file
+    assert len(samples[2]) == len(SAMPLES_HEADER)
+    assert samples[2][7] == 'Seal failed (exit code 1): boom Reads: 100 Time: 1.2s'
 
     report = json.loads(reports[2].read_text())
     assert report['tool'] == 'seqcounter' and report['command'] == run['command']

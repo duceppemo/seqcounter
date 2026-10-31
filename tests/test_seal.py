@@ -125,7 +125,7 @@ def test_safe_paths_keeps_right_extension(tmp_path):
         [str(tmp_path / 'reads.fastq')]
 
 
-def test_safe_temporary_folder(monkeypatch):
+def test_safe_temporary_folder(tmp_path, monkeypatch):
     folder = seal.safe_temporary_folder()
     assert os.path.isdir(folder) and not seal.UNSAFE.search(folder)
     os.rmdir(folder)
@@ -133,7 +133,7 @@ def test_safe_temporary_folder(monkeypatch):
     made = []
 
     def unsafe_mkdtemp(prefix):
-        folder = '/tmp/{}xmx{}'.format(prefix, len(made))
+        folder = str(tmp_path / '{}xmx{}'.format(prefix, len(made)))
         os.mkdir(folder)
         made.append(folder)
         return folder
