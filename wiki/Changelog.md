@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.0.2 (2026-10-31)
 * A [Tutorial](Tutorial): counting IS6110 in three public *M. tuberculosis* read sets, from installing to reading
   the reports and normalizing the counts, with the real output of every command.
 * A [Validation](Validation) page, and `validation/run_validation.sh`, which reproduces it from public data in a
@@ -8,12 +8,17 @@
   over 200,000 reads and 77 references; a reference is counted once per sequence of a fasta file, even at 16
   copies; with even coverage the counts follow the model to a median of 1.00 and recover a 16-copy element as 16.1
   copies; a sequence absent from the genome stays at zero everywhere; and `-m 1` adds reads from near-matches
-  elsewhere in the genome for 22 of 77 references, by nothing at the median window and up to +43%. Two figures,
-  drawn from the results by `validation/make_figures.py`, show the counts against the model and the spread of
+  elsewhere in the genome for 22 of 77 references, by nothing at the median window and up to +43%. Three
+  figures, drawn from the results by `validation/make_figures.py`: the counts against the model, the spread of
   real coverage, and a circular map of the chromosome showing where the 16 IS6110 copies and the 75 single-copy
   references sit, with the copy number of every kilobase of the genome.
 * The logo is drawn as outlines rather than text, so it renders without the font it was designed in, and the wiki
   front page carries it.
+* `refseqcounts_samples.tsv` is always one line of eight fields per sample: a tab or a line break in an error
+  message (Seal's output is tab aligned and several lines long) or in a file name is replaced by a space, instead
+  of shifting the columns of that row.
+* The counts are unchanged: 1.0.2 and 1.0.1 count identically. What is new is the tutorial, the validation and the
+  figures.
 
 ## 1.0.1 (2026-10-30)
 * The default branch is now `main`, and the links that named the branch follow it: the logo in the README, which

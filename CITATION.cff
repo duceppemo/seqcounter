@@ -13,8 +13,8 @@ authors:
     given-names: Marc-Olivier
     email: marc-olivier.duceppe@inspection.gc.ca
     affiliation: Canadian Food Inspection Agency
-version: 1.0.1
-date-released: "2026-10-30"
+version: 1.0.2
+date-released: "2026-10-31"
 doi: 10.5281/zenodo.23826933
 identifiers:
   - type: doi
