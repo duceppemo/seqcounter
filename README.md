@@ -1,80 +1,109 @@
-# SeqCounter
-## Description
-Count occurrence of reference sequence(s) from NGS sequencing (fastq) and assembly (fasta) data. Designed to run on Linux. Tested on Ubuntu 18.
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/duceppemo/seqcounter/master/assets/logo_dark.svg">
+    <img src="https://raw.githubusercontent.com/duceppemo/seqcounter/master/assets/logo.svg" width="520" alt="seqcounter: count reference sequences in reads or assemblies">
+  </picture>
+</p>
 
-## Workflow
-1. Single- or paired-end fastq files or fasta assembly are searched for the spoligo spacers using `Seal` from `BBtools`.
-2. Reference sequence counts reported using `pandas`.
+<p align="center">
+  <a href="https://github.com/duceppemo/seqcounter/actions/workflows/tests.yml"><img src="https://github.com/duceppemo/seqcounter/actions/workflows/tests.yml/badge.svg" alt="Tests"></a>
+  <a href="https://codecov.io/gh/duceppemo/seqcounter"><img src="https://codecov.io/gh/duceppemo/seqcounter/graph/badge.svg" alt="Coverage"></a>
+  <a href="https://github.com/duceppemo/seqcounter/releases/latest"><img src="https://img.shields.io/github/v/release/duceppemo/seqcounter?cacheSeconds=3600" alt="Release"></a>
+  <a href="https://pypi.org/project/seqcounter/"><img src="https://img.shields.io/pypi/v/seqcounter?cacheSeconds=3600" alt="PyPI"></a>
+  <img src="https://img.shields.io/badge/python-3.10%E2%80%933.14-blue" alt="Python 3.10–3.14">
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/duceppemo/seqcounter" alt="License"></a>
+  <a href="https://github.com/duceppemo/seqcounter/wiki"><img src="https://img.shields.io/badge/docs-wiki-informational" alt="Documentation"></a>
+</p>
+
+Count how many sequencing reads (fastq) or contigs (fasta) contain each sequence of a reference file, with
+[Seal](https://sourceforge.net/projects/bbmap/) from BBTools. Point it at a reference fasta file and a sample, or a
+folder of samples, and it writes one table of counts per reference sequence and per sample.
+
+Any set of short sequences works: spoligotype spacers, marker or resistance genes, primer or probe sequences,
+plasmid or phage fragments, barcodes, spike-ins. seqcounter does not interpret them; it counts them, reproducibly
+and in the same way for reads and for assemblies.
+
+```
+$ seqcounter -ref refs.fasta -i samples/ -o results/
+Reference   assembly  no_match  paired  single_end
+absent      0         0         0       0
+present     1         0         86      34
+twice       1         0         154     65
+```
+
+## Features
+* **Reads or assemblies**: single-end or paired-end fastq, or fasta, gzipped or not. Both mates of a pair are
+  counted, once each.
+* **Batch mode**: point it at a folder; fastq and fasta files are found recursively and R1/R2 files paired
+  automatically. Several samples can be counted at the same time.
+* **Both strands, and mismatches**: a reference is found on either strand, and with up to `-m` mismatches per k-mer
+  (one by default).
+* **Three reports**: the counts table (`refseqcounts.tsv`, the table the first version of seqcounter wrote, with the
+  command that produced it on its first line), a per-sample summary of how much was read and how much matched, and a
+  JSON report with the parameters, the software versions and the counts.
+* **Nothing is hidden**: references Seal cannot find (shorter than the k-mer size), names that would collide, and
+  samples that failed are reported, not silently dropped. A failed sample leaves the others readable.
+* **Nothing to configure**: no database, no index, no reference genome. Only the Python standard library, plus
+  BBTools.
+* **Tested**: 105 tests, 100% coverage, end to end on synthetic references, genomes and reads with known counts.
+
 ## Installation
-1. Create and activate `seqcounter` virtual environment:
-```commandline
-# Create virtual environment
-conda create -n seqcounter -y -c bioconda bbmap pandas psutil
-
-# Activate virtual environment
+```
+conda create -n seqcounter -c conda-forge -c bioconda bbmap python">=3.10"
 conda activate seqcounter
+pip install seqcounter
 ```
-2. Clone the `seqcounter` repository and make sure it runs smoothly:
-```commandline
-# Clone repo
-git clone https://github.com/duceppemo/seqcounter
+BBTools (which provides `seal.sh`) is not on PyPI, so it comes from bioconda; seqcounter itself needs nothing else.
+See [Installation](https://github.com/duceppemo/seqcounter/wiki/Installation) for other options, including running
+it from a clone with `python seqcounter.py`, as the first version did.
 
-# Go into cloned repo
-cd seqcounter
+## Quick start
+```
+seqcounter -ref refs.fasta -r1 sample_R1.fastq.gz -r2 sample_R2.fastq.gz -o results/  # Paired-end reads
+seqcounter -ref refs.fasta -r1 sample.fastq.gz -o results/                            # Single-end reads
+seqcounter -ref refs.fasta -r1 assembly.fasta -o results/                             # An assembly
+seqcounter -ref refs.fasta -i samples/ -o results/ -p 4                               # A folder, 4 at a time
+```
+`-ref` is a fasta file of the sequences to count: each one gives a row, named after the first word of its `>` line.
+The counts are printed and saved in `results/`. To see it work on data with known counts, run
+`bash examples/run_example.sh`, which generates its own references and samples.
 
-# Test seqcounter
-python seqcounter.py -h
-```
-## Usage
-```commandline
-usage: python seqcounter.py [-h] [-i /path/to/folder/with/fastq/or/fasta/files] [-r1 /path/to/sample_R1.[fastq|fasta]] [-r2 /path/to/R2/fastq] -ref /path/to/ref.fasta [-k 25] [-m 1] -o /path/to/output/folder/ [-t 16] [-p 2] [-v]
+**What a count is**: the number of reads, or contigs, that contain the reference sequence, not the number of copies
+it has in them. A reference present twice in a single-contig assembly is counted once; in reads, about twice as many
+reads match it. See [How it works](https://github.com/duceppemo/seqcounter/wiki/How-it-works).
 
-Count occurrence of reference sequence(s) in fastq or fasta.
+## Documentation
+The **[wiki](https://github.com/duceppemo/seqcounter/wiki)** covers
+[installation](https://github.com/duceppemo/seqcounter/wiki/Installation),
+[usage and options](https://github.com/duceppemo/seqcounter/wiki/Usage),
+[output files](https://github.com/duceppemo/seqcounter/wiki/Output-files),
+[how it works](https://github.com/duceppemo/seqcounter/wiki/How-it-works),
+[troubleshooting](https://github.com/duceppemo/seqcounter/wiki/Troubleshooting) and the
+[FAQ](https://github.com/duceppemo/seqcounter/wiki/FAQ).
 
-optional arguments:
-  -h, --help            show this help message and exit
-  -i /path/to/folder/with/fastq/or/fasta/files, --input /path/to/folder/with/fastq/or/fasta/files
-                        Folder containing fastq or fasta file to search. Gzipped or not. Mandatory.
-  -r1 /path/to/sample_R1.[fastq|fasta]
-                        R1 fastq file from paired-end or single end sequencing data or fasta file. Gzipped or not. Mandatory.
-  -r2 /path/to/R2/fastq
-                        R2 fastq file from paired-end. Optional.
-  -ref /path/to/ref.fasta
-                        Fasta file containing reference sequence(s) to find and count occurrence. Optional.
-  -k 25, --kmer-size 25
-                        Kmer length used for finding reference sequences. reference sequences shorter than k will not be found. Default 25. Optional.
-  -m 1, --mismatch 1    Maximum number of mismatches between the reference and the input sequences (Maximum Hamming distance for ref kmers). Default 1. Optional.
-  -o /path/to/output/folder/, --output /path/to/output/folder/
-                        Folder to hold the result files. Mandatory.
-  -t 16, --threads 16   Number of threads. Default is maximum available(16). Optional
-  -p 2, --parallel 2    Number of samples to process in parallel. Default is 2. Optional.
-  -v, --version         show program's version number and exit
+## Citing
+If you use seqcounter, please cite it and BBTools, which does the counting:
 
-```
-## Examples
-1. Single-end input fastq file:
-```commandline
-python seqcounter.py \
-    -r1 ERR1744454_1.fastq.gz \
-    -o spoligotyper_output/
-```
-2. Paired-end fastq input file:
-```commandline
-python seqcounter.py \
-    -r1 ERR2747598_R1.fastq.gz \
-    -r2 ERR2747598_R2.fastq.gz \
-    -o spoligotyper_output/
-```
-3. Fasta input file (genome assembly):
-```commandline
-python seqcounter.py \
-    -r1 NC_002945.4.fasta \
-    -o spoligotyper_output/
-```
-4. Input folder containing single-end fastq, paired-end fastq and fasta files:
-```commandline
-python seqcounter.py \
-    -i input/folder/ \
-    -o spoligotyper_output/
-```
+> Duceppe M-O. seqcounter: count the occurrences of reference sequences in sequencing reads or genome assemblies.
+> https://github.com/duceppemo/seqcounter
 
+> Bushnell B. BBTools. https://sourceforge.net/projects/bbmap/
+
+GitHub's **"Cite this repository"** button gives the citation in APA and BibTeX formats, from
+[`CITATION.cff`](CITATION.cff).
+
+## Related
+* [spoligotyper](https://github.com/duceppemo/spoligotyper) — *in silico* spoligotyping of the *M. tuberculosis*
+  complex. It counts the 43 spacers the way seqcounter counts any reference, and then reads them as a spoligotype,
+  with the species, the lineage and a PDF report.
+* [brucetyper](https://github.com/duceppemo/brucetyper) — *in silico* Bruce-ladder, Suis-ladder, AMOS and RB51
+  junction PCR for *Brucella*, from assemblies.
+
+## Contributing
+Bug reports, questions and pull requests are welcome: see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Author
+Marc-Olivier Duceppe, Canadian Food Inspection Agency (CFIA): marc-olivier.duceppe@inspection.gc.ca
+
+## License
+[MIT](LICENSE)

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 140" width="560" height="140" role="img"
+     aria-label="seqcounter: count reference sequences in reads or assemblies">
+  <title>seqcounter</title>
+  <g fill="none" stroke-linecap="round">
+    <!-- Reads matching the reference, stacked above it -->
+    <g stroke="#5fb8c9" stroke-width="9">
+      <path d="M22 26h54"/>
+      <path d="M40 44h58"/>
+      <path d="M16 62h46"/>
+      <path d="M52 80h52"/>
+    </g>
+    <!-- The reference sequence -->
+    <path d="M14 106h96" stroke="#6d787f" stroke-width="9"/>
+  </g>
+  <!-- The count -->
+  <g font-family="'DejaVu Sans',Verdana,Geneva,sans-serif">
+    <text x="126" y="72" font-size="34" font-weight="700" fill="#5fb8c9">4</text>
+    <text x="172" y="66" font-size="52" font-weight="700" fill="#eef4f6" letter-spacing="-1">seqcounter</text>
+    <text x="174" y="100" font-size="19" fill="#a9b6bd">count reference sequences in reads or assemblies</text>
+  </g>
+</svg>

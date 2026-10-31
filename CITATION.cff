@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+message: "If you use seqcounter, please cite it as below, together with BBTools."
+title: "seqcounter: count the occurrences of reference sequences in sequencing reads or genome assemblies"
+type: software
+abstract: >-
+  seqcounter counts how many sequencing reads (fastq) or contigs (fasta) contain each sequence of a reference fasta
+  file, using Seal from BBTools. Matches are counted on both strands and with mismatches, single-end reads,
+  paired-end reads and assemblies are all supported, and a folder of samples gives one table of counts per
+  reference sequence and per sample, with a per-sample summary of how much was read and matched, and a JSON report
+  of the run.
+authors:
+  - family-names: Duceppe
+    given-names: Marc-Olivier
+    email: marc-olivier.duceppe@inspection.gc.ca
+    affiliation: Canadian Food Inspection Agency
+version: 1.0.0
+date-released: "2026-10-30"
+# The Zenodo DOI of the archived release is added here once the release is published.
+license: MIT
+repository-code: "https://github.com/duceppemo/seqcounter"
+url: "https://github.com/duceppemo/seqcounter/wiki"
+keywords:
+  - bioinformatics
+  - k-mer counting
+  - reference sequences
+  - sequencing reads
+  - genome assemblies
+references:
+  - type: software
+    title: "BBTools"
+    authors:
+      - family-names: Bushnell
+        given-names: Brian
+    url: "https://sourceforge.net/projects/bbmap/"
