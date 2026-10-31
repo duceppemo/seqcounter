@@ -194,6 +194,7 @@ def spread(angles, minimum):
 def style(plt, theme):
     plt.rcParams.update({
         'svg.fonttype': 'path', 'font.family': 'DejaVu Sans', 'font.size': 10,
+        'svg.hashsalt': 'seqcounter',  # Fixed, so that redrawing unchanged data rewrites the same bytes
         'figure.facecolor': 'none', 'axes.facecolor': 'none',
         'text.color': theme['ink'], 'axes.labelcolor': theme['muted'],
         'xtick.color': theme['muted'], 'ytick.color': theme['muted'],
@@ -255,7 +256,7 @@ def figure_model(plt, theme, sim, out_path):
     for text in legend.get_texts():
         text.set_color(theme['ink'])
     fig.tight_layout()
-    fig.savefig(out_path, format='svg', transparent=True)
+    fig.savefig(out_path, format='svg', transparent=True, metadata={'Date': None})
     plt.close(fig)
 
 
@@ -306,7 +307,7 @@ def figure_coverage(plt, theme, samples, out_path):
     for text in legend.get_texts():
         text.set_color(theme['ink'])
     fig.tight_layout()
-    fig.savefig(out_path, format='svg', transparent=True)
+    fig.savefig(out_path, format='svg', transparent=True, metadata={'Date': None})
     plt.close(fig)
 
 
@@ -403,7 +404,7 @@ def figure_chromosome(plt, theme, profile, loci, windows, out_path):
     for text in legend.get_texts():
         text.set_color(theme['ink'])
     fig.subplots_adjust(left=0.12, right=0.88, top=0.79, bottom=0.13)
-    fig.savefig(out_path, format='svg', transparent=True)
+    fig.savefig(out_path, format='svg', transparent=True, metadata={'Date': None})
     plt.close(fig)
 
 
