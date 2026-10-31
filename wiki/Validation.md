@@ -8,9 +8,10 @@ which downloads about 150 MB of public data and takes a few minutes:
 bash validation/run_validation.sh
 ```
 
-The figures below are drawn from those same results by
-[`validation/make_figures.py`](https://github.com/duceppemo/seqcounter/blob/main/validation/make_figures.py), so
-they change with the data and not by hand.
+The figures below are drawn by
+[`validation/make_figures.py`](https://github.com/duceppemo/seqcounter/blob/main/validation/make_figures.py) from
+those same results — and, for the chromosome, from the genome and the feature table NCBI serves for it — so they
+change with the data and not by hand.
 
 It checks what seqcounter counts against counts that are known independently: in an assembly, in reads simulated
 from that assembly, and in three public read sets.
@@ -29,6 +30,21 @@ Nothing here is taken on trust. The copy number of IS6110 is **measured**, not q
 looked up in the genome, and the median k-mer occurs **16 times**, which is the accepted copy number for H37Rv. The
 single-copy windows are kept only when **every** one of their k-mers occurs exactly once in the genome, on either
 strand, so their copy number is one by construction; 75 of 84 candidate windows passed.
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/duceppemo/seqcounter/main/assets/validation_chromosome_dark.svg">
+    <img src="https://raw.githubusercontent.com/duceppemo/seqcounter/main/assets/validation_chromosome.svg" width="700" alt="A circular map of the 4,411,532 bp H37Rv chromosome: sixteen IS6110 copies at fifteen sites marked across the chromosome ring, a ruler in megabases, an inner ring giving the copy number of a typical 25-mer in each kilobase, the 75 single-copy reference windows as ticks, and eight named loci outside.">
+  </picture>
+</p>
+
+*The chromosome the counts are made against. Orange: every place a 25-mer of IS6110 occurs, grouped into sites —
+15 sites, 16 copies, the pair at 3.55 Mb being tandem. Teal: the copy number of a typical 25-mer in each
+kilobase, on a log scale, which is 1 for 4,326 of the 4,411 kilobases. The 20 that reach the dashed ring are all
+IS6110 and all read exactly 16; of the other 65 repeated kilobases, none goes above 6. Grey ticks: the 75
+single-copy windows the counts are read against. The named loci are at the coordinates the record's own feature
+table gives, including the direct-repeat locus that spoligotyping reads, which here carries an IS6110 copy of
+its own.*
 
 ## 1. In an assembly, a reference is counted once
 

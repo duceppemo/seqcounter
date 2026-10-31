@@ -29,6 +29,7 @@ fetch() {  # fetch <url> <file>
 echo "== reference genome and insertion sequence =="
 fetch "$eutils?db=nuccore&id=NC_000962.3&rettype=fasta&retmode=text" "$data/H37Rv.fasta"
 fetch "$eutils?db=nuccore&id=X17348.1&rettype=fasta&retmode=text" "$data/IS6110.fasta"
+fetch "$eutils?db=nuccore&id=NC_000962.3&rettype=ft&retmode=text" "$data/H37Rv_features.txt"
 
 echo
 echo "== reference set: IS6110, single-copy windows, and a sequence that is not in the genome =="

@@ -10,7 +10,8 @@
   copies; a sequence absent from the genome stays at zero everywhere; and `-m 1` adds reads from near-matches
   elsewhere in the genome for 22 of 77 references, by nothing at the median window and up to +43%. Two figures,
   drawn from the results by `validation/make_figures.py`, show the counts against the model and the spread of
-  real coverage.
+  real coverage, and a circular map of the chromosome showing where the 16 IS6110 copies and the 75 single-copy
+  references sit, with the copy number of every kilobase of the genome.
 * The logo is drawn as outlines rather than text, so it renders without the font it was designed in, and the wiki
   front page carries it.
 
