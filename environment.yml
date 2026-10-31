@@ -1,0 +1,11 @@
+name: seqcounter
+channels:
+  - conda-forge
+  - bioconda
+  - nodefaults
+dependencies:
+  - python>=3.10
+  - bbmap>=38.0
+  - pytest
+  - pytest-cov
+  - pip
